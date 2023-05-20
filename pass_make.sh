@@ -5,13 +5,13 @@ PASSWORK_TOKEN="${TOKEN10}"
 masterHash=$PASSWORK_TOKEN
 sftp_pass=$(echo -n "$2" | base64)   > /dev/null
 db_pass=$(echo -n "$3" | base64)   > /dev/null
-value=$(echo -n "tb$1" | base64)   > /dev/null
-if [[ $1 -lt 10 ]]; then # Меньше 10
+value=$(echo -n "$login" | base64)   > /dev/null
+if [[ $1 -lt 10 ]]; then # X < 10
     QUERY="{\"name\":\"!$login$name\",\"login\":\"$login\",\"cryptedPassword\":\"$sftp_pass\",\"vaultId\":\"$SeifID_back\",
     \"folderId\":\"$FolderID_back\",\"url\":\"$login$url\",\"custom\":[{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQu9C+0LPQuNC9IDE=\",
     \"value\":\"$value\",\"type\":\"dGV4dA==\"},{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQv9Cw0YDQvtC70YwgMQ==\",\"value\":\"$db_pass\",
     \"type\":\"cGFzc3dvcmQ=\"}],\"description\":\"$descrt\",\"masterHash\":\"$masterHash\",\"colors\":[12]}"
-else
+elif [[ $1 -gt 9 || $1 -lt 100 ]]; then  # 9 < X < 100
     QUERY="{\"name\":\"$login$name\",\"login\":\"$login\",\"cryptedPassword\":\"$sftp_pass\",\"vaultId\":\"$SeifID_back\",
     \"folderId\":\"$FolderID_back\",\"url\":\"$login$url\",\"custom\":[{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQu9C+0LPQuNC9IDE=\",
     \"value\":\"$value\",\"type\":\"dGV4dA==\"},{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQv9Cw0YDQvtC70YwgMQ==\",\"value\":\"$db_pass\",

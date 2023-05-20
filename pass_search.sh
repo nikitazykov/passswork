@@ -2,12 +2,11 @@
 source .env
 
 PASSWORK_TOKEN="${TOKEN10}"
-if [[ $1 -lt 10 ]]; then # Меньше 10
+if [[ $1 -lt 10 ]]; then # X < 10
     QUERY="{\"query\":\"$login\",\"vaultId\":\"$SeifID_back\",\"colors\":[12]}"
-else
+elif [[ $1 -gt 9 || $1 -lt 100 ]]; then # 9 < X < 100
     QUERY="{\"query\":\"$login\",\"vaultId\":\"$SeifID_back\"}"
 fi
-
 PASS_search=$(curl -s -X POST "${HOST}/passwords/search" \
  -H "Accept: application/json" \
  -H "Passwork-Auth: ${PASSWORK_TOKEN}" \
