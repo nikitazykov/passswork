@@ -2,7 +2,7 @@
 source .env
 
 PASSWORK_TOKEN="${TOKEN10}"
-if [[ $1 -lt 10 ]]; then # X < 10
+if [[ $1 -gt 0 || $1 -lt 10 ]]; then # 0 < X < 10
     QUERY="{\"query\":\"$login\",\"vaultId\":\"$SeifID_back\",\"colors\":[12]}"
 elif [[ $1 -gt 9 || $1 -lt 100 ]]; then # 9 < X < 100
     QUERY="{\"query\":\"$login\",\"vaultId\":\"$SeifID_back\"}"
