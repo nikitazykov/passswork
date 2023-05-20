@@ -2,9 +2,9 @@
 source .env
 
 PASSWORK_TOKEN="${TOKEN10}"
-if [[ $1 -gt 0 || $1 -lt 10 ]]; then # 0 < X < 10
+if (( 0 < $1 && $1 < 10 )); then # 0 < X < 10
     QUERY="{\"query\":\"$login\",\"vaultId\":\"$SeifID_back\",\"colors\":[12]}"
-elif [[ $1 -gt 9 || $1 -lt 100 ]]; then # 9 < X < 100
+elif (( 9 < $1 && $1 < 100 )); then  # 9 < X < 100
     QUERY="{\"query\":\"$login\",\"vaultId\":\"$SeifID_back\"}"
 fi
 PASS_search=$(curl -s -X POST "${HOST}/passwords/search" \
