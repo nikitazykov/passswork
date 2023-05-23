@@ -8,15 +8,18 @@ db_pass=$(echo -n "$3" | base64)   > /dev/null
 value=$(echo -n "$login" | base64)   > /dev/null
 if (( 0 < $1 && $1 < 10 )); then # 0 < X < 10
     QUERY="{\"name\":\"!$login$name\",\"login\":\"$login\",\"cryptedPassword\":\"$sftp_pass\",\"vaultId\":\"$SeifID_back\",
-    \"folderId\":\"$FolderID_back\",\"url\":\"$login$url\",\"custom\":[{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQu9C+0LPQuNC9IDE=\",
+    \"url\":\"$login$url\",\"custom\":[{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQu9C+0LPQuNC9IDE=\",
     \"value\":\"$value\",\"type\":\"dGV4dA==\"},{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQv9Cw0YDQvtC70YwgMQ==\",\"value\":\"$db_pass\",
     \"type\":\"cGFzc3dvcmQ=\"}],\"description\":\"$descr\",\"masterHash\":\"$masterHash\",\"color\":12}"
 elif (( 9 < $1 && $1 < 100 )); then  # 9 < X < 100
     QUERY="{\"name\":\"$login$name\",\"login\":\"$login\",\"cryptedPassword\":\"$sftp_pass\",\"vaultId\":\"$SeifID_back\",
-    \"folderId\":\"$FolderID_back\",\"url\":\"$login$url\",\"custom\":[{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQu9C+0LPQuNC9IDE=\",
+    \"url\":\"$login$url\",\"custom\":[{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQu9C+0LPQuNC9IDE=\",
     \"value\":\"$value\",\"type\":\"dGV4dA==\"},{\"name\":\"0JTQvtC/0L7Qu9C90LjRgtC10LvRjNC90YvQuSDQv9Cw0YDQvtC70YwgMQ==\",\"value\":\"$db_pass\",
     \"type\":\"cGFzc3dvcmQ=\"}],\"description\":\"$descr\",\"masterHash\":\"$masterHash\"}"
 fi
+# \"folderId\":\"$FolderID_back\",
+
+bash ./pass_del_copy.sh $1
 
 PASS_make=$(curl -s -X POST "${HOST}/passwords" \
  -H "Accept: application/json" \
@@ -32,4 +35,5 @@ if [[ $PASS_stat == "success" ]]; then
     echo "---Ссылка в Passwork:" | tee -a /server/$DOMAIN.ru/tb$1.txt
     echo "https://passwork.$DOMAIN.ru/#!/p/$PASS_ID" | tee -a /server/$DOMAIN.ru/tb$1.txt
 fi
+    
 
