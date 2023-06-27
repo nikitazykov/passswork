@@ -58,4 +58,4 @@ bash auth_logout.sh
 ```
 Будет произведён выход и удалён __TOKEN10__ в файл __.env__.
 
-<h3 align="right"><b><a  href="https://github.com/nikitazykov">®By nikitazykov</a></b></h3>
+<h3 align="right"><b><a  href="https://github.com/nikitazykov">By nikitazykov</a></b></h3>
